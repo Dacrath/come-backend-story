@@ -1,0 +1,13 @@
+package com.example.come_backend_story;
+
+import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
+
+@SpringBootApplication
+public class ComeBackendStoryApplication {
+
+	public static void main(String[] args) {
+		SpringApplication.run(ComeBackendStoryApplication.class, args);
+	}
+
+}

@@ -6,9 +6,9 @@ import com.example.come_backend_story.response.UserResponse;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpHeaders;
-import org.springframework.http.HttpMethod;
 import org.springframework.stereotype.Component;
 import org.springframework.web.client.RestTemplate;
+import org.springframework.web.util.UriComponentsBuilder;
 
 import java.util.Map;
 
@@ -21,70 +21,42 @@ public class TSheetsClient {
   public TSheetsClient(@Value("${oauth.token}") String oauthToken, RestTemplate restTemplate) {
     this.restTemplate = restTemplate;
 
-    // Set default headers with Bearer token
+    // Add Authorization header to all requests
     HttpHeaders headers = new HttpHeaders();
     headers.set("Authorization", "Bearer " + oauthToken);
-    this.restTemplate.setInterceptors(List.of(
-        (request, body, execution) -> {
-          request.getHeaders().addAll(headers);
-          return execution.execute(request, body);
-        }
-    ));
+
+    this.restTemplate.setInterceptors(List.of((request, body, execution) -> {
+      request.getHeaders().addAll(headers);
+      return execution.execute(request, body);
+    }));
   }
 
-  /**
-   * Fetch Job Codes - using RestTemplate
-   */
+  // ==================== Job Codes ====================
   public JobCodeResponse getJobCodes(Map<String, String> params) {
-    String url = baseUrl + "/jobcodes";
+    String url = buildUrl("/jobcodes", params);
+    return restTemplate.getForObject(url, JobCodeResponse.class);
+  }
 
-    // Build query parameters
-    StringBuilder query = new StringBuilder();
-    params.forEach((key, value) -> {
-      if (query.length() > 0) query.append("&");
-      query.append(key).append("=").append(value);
-    });
+  // ==================== Groups ====================
+  public GroupResponse getGroups(Map<String, String> params) {
+    String url = buildUrl("/groups", params);
+    return restTemplate.getForObject(url, GroupResponse.class);
+  }
 
-    if (query.length() > 0) {
-      url += "?" + query;
+  // ==================== Users ====================
+  public UserResponse getUsers(Map<String, String> params) {
+    String url = buildUrl("/users", params);
+    return restTemplate.getForObject(url, UserResponse.class);
+  }
+
+  // Helper method to build URL with query parameters
+  private String buildUrl(String endpoint, Map<String, String> params) {
+    UriComponentsBuilder builder = UriComponentsBuilder.fromUriString(baseUrl + endpoint);
+
+    if (params != null && !params.isEmpty()) {
+      params.forEach(builder::queryParam);
     }
 
-    return restTemplate.exchange(
-        url,
-        HttpMethod.GET,
-        null,
-        JobCodeResponse.class
-    ).getBody();
+    return builder.toUriString();
   }
-  /**
-   * Fetch Groups
-   */
-  public GroupResponse getGroups(Map<String, String> params) {
-    return restTemplate.getForObject(
-        "https://rest.tsheets.com/api/v1/groups?" + buildQueryParams(params),
-        GroupResponse.class
-    );
-  }
-
-  /**
-   * Fetch Users
-   */
-  public UserResponse getUsers(Map<String, String> params) {
-    return restTemplate.getForObject(
-        "https://rest.tsheets.com/api/v1/users?" + buildQueryParams(params),
-        UserResponse.class
-    );
-  }
-
-  private String buildQueryParams(Map<String, String> params) {
-    if (params == null || params.isEmpty()) return "";
-
-    StringBuilder sb = new StringBuilder();
-    params.forEach((key, value) -> {
-      if (sb.length() > 0) sb.append("&");
-      sb.append(key).append("=").append(value);
-    });
-    return sb.toString();
-  }
-
 }

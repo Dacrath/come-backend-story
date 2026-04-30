@@ -6,7 +6,7 @@ import lombok.*;
 import java.time.OffsetDateTime;
 
 @Entity
-@Table(name = "users")          // renamed from "user" (reserved word in many DBs)
+@Table(name = "users")
 @Getter
 @Setter
 @NoArgsConstructor
@@ -17,21 +17,28 @@ public class UserEntity {
   @Id
   private Long id;
 
-  @Column(length = 80)
+  @Column(name = "first_name", length = 80)
   private String firstName;
 
-  @Column(length = 80)
+  @Column(name = "last_name", length = 80)
   private String lastName;
 
+  @Column(name = "group_id")
   private Long groupId;
 
   @Column(length = 100)
   private String email;
 
-  @Column(length = 15)
+  @Column(name = "cell_number", length = 15)
   private String cellNumber;
 
+  private Boolean active = true;
+
+  @Column(name = "last_modified")
   private OffsetDateTime lastModified;
 
-  private Boolean active = true;
+  @Column(name = "synced_at")
+  private OffsetDateTime syncedAt;
+
+  private Boolean deleted = false;
 }

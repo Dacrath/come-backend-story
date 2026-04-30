@@ -1,6 +1,8 @@
 package com.example.come_backend_story.client;
 
+import com.example.come_backend_story.response.GroupResponse;
 import com.example.come_backend_story.response.JobCodeResponse;
+import com.example.come_backend_story.response.UserResponse;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpHeaders;
@@ -54,4 +56,35 @@ public class TSheetsClient {
         JobCodeResponse.class
     ).getBody();
   }
+  /**
+   * Fetch Groups
+   */
+  public GroupResponse getGroups(Map<String, String> params) {
+    return restTemplate.getForObject(
+        "https://rest.tsheets.com/api/v1/groups?" + buildQueryParams(params),
+        GroupResponse.class
+    );
+  }
+
+  /**
+   * Fetch Users
+   */
+  public UserResponse getUsers(Map<String, String> params) {
+    return restTemplate.getForObject(
+        "https://rest.tsheets.com/api/v1/users?" + buildQueryParams(params),
+        UserResponse.class
+    );
+  }
+
+  private String buildQueryParams(Map<String, String> params) {
+    if (params == null || params.isEmpty()) return "";
+
+    StringBuilder sb = new StringBuilder();
+    params.forEach((key, value) -> {
+      if (sb.length() > 0) sb.append("&");
+      sb.append(key).append("=").append(value);
+    });
+    return sb.toString();
+  }
+
 }

@@ -15,12 +15,18 @@ import java.time.OffsetDateTime;
 public class GroupEntity {
 
   @Id
-  private Long id;                    // TSheets group ID
+  private Long id;
 
   @Column(nullable = false, length = 80)
   private String name;
 
+  private Boolean active = true;
+
+  @Column(name = "last_modified")
   private OffsetDateTime lastModified;
 
-  private Boolean active = true;
+  @Column(name = "synced_at")
+  private OffsetDateTime syncedAt;
+
+  private Boolean deleted = false;
 }

@@ -53,7 +53,11 @@
 		<dependency>
 			<groupId>com.h2database</groupId>
 			<artifactId>h2</artifactId>
-			<scope>runtime</scope>
+		</dependency>
+		<!-- H2 Console for Spring Boot 4.x -->
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-h2console</artifactId>
 		</dependency>
 		<!-- Lombok -->
 		<!-- Source: https://mvnrepository.com/artifact/org.projectlombok/lombok -->
@@ -63,6 +67,11 @@
 		 <version>1.18.46</version>
 		 <optional>true</optional>
 		 <scope>provided</scope>
+		</dependency>
+		<!-- Spring Security -->
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-security</artifactId>
 		</dependency>
 	</dependencies>
 

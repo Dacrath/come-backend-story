@@ -1,4 +1,4 @@
-package com.example.come_backend_story.entities;
+package com.example.come_backend_story.entity;
 
 import jakarta.persistence.*;
 import lombok.*;

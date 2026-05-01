@@ -8,6 +8,7 @@ import com.example.come_backend_story.response.GroupResponse;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.boot.CommandLineRunner;
+import org.springframework.core.annotation.Order;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 
@@ -18,6 +19,7 @@ import java.util.Map;
 @Slf4j
 @Service
 @RequiredArgsConstructor
+@Order(1)
 public class GroupSyncService implements CommandLineRunner {
 
   private final TSheetsClient tsheetsClient;

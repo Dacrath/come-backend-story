@@ -6,6 +6,7 @@ import com.example.come_backend_story.mapper.TSheetsMapper;
 import com.example.come_backend_story.repository.JobCodeRepository;
 import com.example.come_backend_story.response.JobCodeResponse;
 import lombok.RequiredArgsConstructor;
+import org.springframework.core.annotation.Order;
 import org.springframework.stereotype.Service;
 import java.util.HashMap;
 import java.util.Map;
@@ -17,6 +18,7 @@ import java.time.OffsetDateTime;
 @Slf4j
 @Service
 @RequiredArgsConstructor
+@Order(1)
 public class JobCodeSyncService implements CommandLineRunner {
 
   private final TSheetsClient tsheetsClient;

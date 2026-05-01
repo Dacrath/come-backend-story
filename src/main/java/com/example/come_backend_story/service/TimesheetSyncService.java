@@ -10,6 +10,7 @@ import com.example.come_backend_story.response.TimesheetResponse;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.boot.CommandLineRunner;
+import org.springframework.core.annotation.Order;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 
@@ -22,6 +23,7 @@ import java.util.stream.Collectors;
 @Slf4j
 @Service
 @RequiredArgsConstructor
+@Order(10)
 public class TimesheetSyncService implements CommandLineRunner {
 
   private final TSheetsClient tsheetsClient;
@@ -114,7 +116,7 @@ public class TimesheetSyncService implements CommandLineRunner {
           log.info("Saved {} timesheets from page {}", timesheets.size(), page);
         }
 
-        hasMore = Boolean.TRUE.equals(response != null ? response.getMore() : false);
+        hasMore = response != null ? response.getMore() : false;
         page++;
       } catch (Exception e) {
         log.error("Error syncing timesheets on page {}", page, e);
@@ -168,7 +170,7 @@ public class TimesheetSyncService implements CommandLineRunner {
           }
         }
 
-        hasMore = Boolean.TRUE.equals(response != null ? response.getMore() : false);
+        hasMore = response != null ? response.getMore() : false;
         page++;
       } catch (Exception e) {
         log.error("Error checking deleted timesheets on page {}", page, e);

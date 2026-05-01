@@ -2,9 +2,11 @@ package com.example.come_backend_story.mapper;
 
 import com.example.come_backend_story.dto.GroupDTO;
 import com.example.come_backend_story.dto.JobCodeDTO;
+import com.example.come_backend_story.dto.TimesheetDTO;
 import com.example.come_backend_story.dto.UserDTO;
 import com.example.come_backend_story.entity.GroupEntity;
 import com.example.come_backend_story.entity.JobCodeEntity;
+import com.example.come_backend_story.entity.TimesheetEntity;
 import com.example.come_backend_story.entity.UserEntity;
 import org.springframework.stereotype.Component;
 import java.time.OffsetDateTime;
@@ -60,6 +62,26 @@ public class TSheetsMapper {
         .email(dto.getEmail())
         .mobileNumber(dto.getMobileNumber())
         .active(dto.getActive() != null ? dto.getActive() : true)
+        .lastModified(dto.getLastModified() != null ? dto.getLastModified() : OffsetDateTime.now())
+        .syncedAt(OffsetDateTime.now())
+        .deleted(false)
+        .build();
+  }
+
+  public TimesheetEntity toTimesheetEntity(TimesheetDTO dto) {
+    if (dto == null) {
+      return null;
+    }
+
+    return TimesheetEntity.builder()
+        .id(dto.getId())
+        .userId(dto.getUserId())
+        .jobcodeId(dto.getJobcodeId())
+        .startTime(dto.getStartTime())
+        .endTime(dto.getEndTime())
+        .duration(dto.getDuration())
+        .onTheClock(dto.getOnTheClock() != null ? dto.getOnTheClock() : false)
+        .notes(dto.getNotes())
         .lastModified(dto.getLastModified() != null ? dto.getLastModified() : OffsetDateTime.now())
         .syncedAt(OffsetDateTime.now())
         .deleted(false)

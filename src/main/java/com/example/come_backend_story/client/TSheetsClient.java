@@ -2,6 +2,8 @@ package com.example.come_backend_story.client;
 
 import com.example.come_backend_story.response.GroupResponse;
 import com.example.come_backend_story.response.JobCodeResponse;
+import com.example.come_backend_story.response.TimesheetDeletedResponse;
+import com.example.come_backend_story.response.TimesheetResponse;
 import com.example.come_backend_story.response.UserResponse;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Value;
@@ -47,6 +49,17 @@ public class TSheetsClient {
   public UserResponse getUsers(Map<String, String> params) {
     String url = buildUrl("/users", params);
     return restTemplate.getForObject(url, UserResponse.class);
+  }
+
+  // ==================== Timesheets ====================
+  public TimesheetResponse getTimesheets(Map<String, String> params) {
+    String url = buildUrl("/timesheets", params);
+    return restTemplate.getForObject(url, TimesheetResponse.class);
+  }
+
+  public TimesheetDeletedResponse getDeletedTimesheets(Map<String, String> params) {
+    String url = buildUrl("/timesheets_deleted", params);
+    return restTemplate.getForObject(url, TimesheetDeletedResponse.class);
   }
 
   // Helper method to build URL with query parameters

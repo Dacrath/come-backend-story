@@ -1,6 +1,7 @@
 package com.example.come_backend_story.repository;
 
 import com.example.come_backend_story.entity.TimesheetEntity;
+import java.util.List;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
@@ -17,6 +18,7 @@ public interface TimesheetRepository extends JpaRepository<TimesheetEntity, Long
   @Query("SELECT MAX(t.lastModified) FROM TimesheetEntity t")
   Optional<OffsetDateTime> findMaxLastModified();
 
+  List<TimesheetEntity> findByOnTheClockTrue();
   /**
    * Soft-delete timesheets by ID
    */

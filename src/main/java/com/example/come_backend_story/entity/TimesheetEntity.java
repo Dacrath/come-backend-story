@@ -3,6 +3,7 @@ package com.example.come_backend_story.entity;
 import jakarta.persistence.*;
 import lombok.*;
 
+import java.math.BigDecimal;
 import java.time.OffsetDateTime;
 
 @Entity
@@ -15,11 +16,12 @@ import java.time.OffsetDateTime;
 public class TimesheetEntity {
 
   @Id
-  private Long id;                         // TSheets timesheet ID
+  private Long id;
 
-  @Column(nullable = false)
+  @Column(name = "user_id", nullable = false)
   private Long userId;
 
+  @Column(name = "jobcode_id")
   private Long jobcodeId;
 
   @Column(name = "start_time")
@@ -28,7 +30,7 @@ public class TimesheetEntity {
   @Column(name = "end_time")
   private OffsetDateTime endTime;
 
-  private Integer duration;                // in seconds (as returned by TSheets)
+  private Integer duration;           // in seconds
 
   @Column(name = "on_the_clock")
   private Boolean onTheClock = false;
@@ -36,11 +38,11 @@ public class TimesheetEntity {
   @Column(length = 4000)
   private String notes;
 
-  @Column(nullable = false)
+  @Column(name = "last_modified", nullable = false)
   private OffsetDateTime lastModified;
 
   @Column(name = "synced_at")
   private OffsetDateTime syncedAt;
 
-  private Boolean deleted = false;         // soft delete flag
+  private Boolean deleted = false;
 }

@@ -29,8 +29,8 @@ public class UserEntity {
   @Column(length = 100)
   private String email;
 
-  @Column(name = "cell_number", length = 15)
-  private String cellNumber;
+  @Column(name = "mobile_number", length = 15)
+  private String mobileNumber;
 
   private Boolean active = true;
 

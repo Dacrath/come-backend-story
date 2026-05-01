@@ -58,7 +58,7 @@ public class TSheetsMapper {
         .lastName(dto.getLastName())
         .groupId(dto.getGroupId())
         .email(dto.getEmail())
-        .cellNumber(dto.getCellNumber())
+        .mobileNumber(dto.getMobileNumber())
         .active(dto.getActive() != null ? dto.getActive() : true)
         .lastModified(dto.getLastModified() != null ? dto.getLastModified() : OffsetDateTime.now())
         .syncedAt(OffsetDateTime.now())

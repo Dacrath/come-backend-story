@@ -7,12 +7,23 @@ import java.time.OffsetDateTime;
 
 @Data
 public class UserDTO {
+
   private Long id;
+
+  @JsonProperty("first_name")
   private String firstName;
+
+  @JsonProperty("last_name")
   private String lastName;
+
+  @JsonProperty("group_id")
   private Long groupId;
+
   private String email;
-  private String cellNumber;
+
+  @JsonProperty("mobile_number")
+  private String mobileNumber;
+
   private Boolean active;
 
   @JsonProperty("last_modified")

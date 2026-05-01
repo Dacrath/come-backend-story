@@ -85,6 +85,8 @@ public class TSheetsMapper {
         .lastModified(dto.getLastModified() != null ? dto.getLastModified() : OffsetDateTime.now())
         .syncedAt(OffsetDateTime.now())
         .deleted(false)
+        .tz(dto.getTz())
+        .tzStr(dto.getTzStr())
         .build();
   }
 }

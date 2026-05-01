@@ -22,10 +22,18 @@ public class TimesheetDTO {
   private OffsetDateTime endTime;
 
   private Integer duration;
+
+  @JsonProperty("on_the_clock")
   private Boolean onTheClock;
 
   private String notes;
 
   @JsonProperty("last_modified")
   private OffsetDateTime lastModified;
+
+  @JsonProperty("tz")           // ← Add this
+  private Integer tz;
+
+  @JsonProperty("tz_str")       // ← Add this
+  private String tzStr;
 }

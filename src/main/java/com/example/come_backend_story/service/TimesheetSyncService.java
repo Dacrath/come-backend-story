@@ -34,7 +34,7 @@ public class TimesheetSyncService implements CommandLineRunner {
   private final GroupSyncService groupSyncService;
 
   @Override
-  public void run(String... args) {
+  public void run(String... args) throws InterruptedException {
     log.info("Starting TimesheetSyncService...");
 
     log.info("Waiting 8 seconds for Users, Groups, and Job Codes to finish initial sync...");

@@ -37,6 +37,9 @@ public class TimesheetSyncService implements CommandLineRunner {
   public void run(String... args) {
     log.info("Starting TimesheetSyncService...");
 
+    log.info("Waiting 8 seconds for Users, Groups, and Job Codes to finish initial sync...");
+    Thread.sleep(8000);   // 8 seconds delay
+
     if (timesheetRepository.count() == 0) {
       log.info("No timesheets found → Running initial 2-hour import");
       importLast2Hours();
